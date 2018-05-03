@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Dweet } from "../../shared/dweet";
 
 @Injectable()
 export class DweetDataService {
@@ -13,11 +14,11 @@ export class DweetDataService {
 
   }
 
-  // public getDweets() {
-  //   return this.http.post<User>(this.authUrl + '/login', userLogin)
-  //   .map(response => response)
-  //   .catch(this.handleError);
-  // }
+  public getDweets(): Observable<Dweet[]> {
+    return this.http.get<Dweet[]>(this.dweetURL + '/dweet')
+    .map(response => response)
+    .catch(this.handleError);
+  }
 
   private handleError(error: HttpErrorResponse) {
     console.log(error);
