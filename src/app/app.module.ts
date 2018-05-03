@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AuthDataService } from './core/services/auth-data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -13,10 +14,10 @@ import { DweetDataService } from './core/services/dweet-data.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, AuthModule, DweetModule
+    BrowserModule, HttpClientModule, AppRoutingModule, AuthModule, DweetModule, ModalModule.forRoot()
   ],
   providers: [AuthDataService, DweetDataService],
   bootstrap: [AppComponent]

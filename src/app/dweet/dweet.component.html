@@ -1,15 +1,19 @@
-<div class="content well">
-  <div class="stream-item-header">
-    <img class="profile-avatar" src="../../assets/user.svg" alt="">
-    <span class="FullNameGroup">
-      <strong class="fullnam">Utpal</strong></span>
-  </div>
+<div *ngFor="let dweet of dweets" class="dweet-block">
 
-  <div>
-    <p class="dweetTextSize  dweet-text">
-      Reviewing action taken on decisions from last meeting at State Co-op. Bank Ltd with Secretary Coop, Registrar,Adm of Coop
-      Societies,NABARD RBI officials. Elections being held after a gap of 30 years. Meeting with Sec,Agriculture in
-      the morning
-    </p>
-  </div>
+    <div class="dweet">
+        <div class="media">
+            <img class="mr-3" src="../../assets/user.svg" alt="Generic placeholder image">
+            <div class="media-body">
+                <h5 class="mt-0"><a>Utpal</a></h5>
+                <h6>Wrote on {{dweet.createdDate | date:'mediumDate'}} </h6>
+                <p class="dweet-message">{{dweet.message}}</p>
+                <div>
+                    <a><span class="badge badge-success"><img src="../../assets/comment.svg"> {{dweet.comments.length }} </span></a>
+                    <a><span class="badge badge-success"><img src="../../assets/thumbsup.svg"> {{ dweet.likes.length }}</span></a>
+                    <a><span class="badge badge-success"><img src="../../assets/sync.svg"> {{dweet.redweets.length }}</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

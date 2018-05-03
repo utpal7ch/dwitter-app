@@ -5,5 +5,5 @@ export class Dweet {
   public redweets: [Object];
   public dweeterId: string;
   public message: string;
-  public comments: [string];
+  public comments: string[];
 }

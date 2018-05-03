@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.main-body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+header h1 {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 5em;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 1px 1px 1px rgb(141, 141, 141);
+}
+
+main {
+    min-height: 90vh;
+    /* border-radius: 8px;
+    box-shadow: 5px 5px 5px grey, inset 2px 2px 3px rgb(221, 221, 221), inset -2px -2px 3px black;
+    background-color: lightblue; */
+}
+
+footer {
+    padding: 10px;
+    background-color: black;
+    color: rgb(199, 199, 199);
+}
+
+button {
+    margin: 2px;
+}
