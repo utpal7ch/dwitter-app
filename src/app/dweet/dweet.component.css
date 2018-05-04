@@ -27,3 +27,12 @@
     background-color: rgba(204, 253, 189, 0.5);
     border-radius: 10px;
 }
+
+.dweet-now-form {
+    border: 1px solid rgb(87, 87, 87);
+    border-radius: 4px;
+}
+
+.dweet-now-form button {
+    margin-left: 85%;
+}

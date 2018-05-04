@@ -83,6 +83,7 @@ export class DweetComponent implements OnInit, OnDestroy {
   createDweet(message: string) {
     this.createDweetSubscription = this.dweetDataService.createDweet(message).subscribe(data => {
       console.log(data);
+      
     });
   }
 
