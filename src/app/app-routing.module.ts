@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './auth/login.component';
 import { DweetComponent } from './dweet/dweet.component';
 import { SignupComponent } from './auth/signup.component';
+import { UnAuthorizedComponenet } from './app-shared/components/unauthorized.component';
+import { NotFoundComponent } from './app-shared/components/not-found.component';
 
 
 const routes: Routes = [
@@ -10,7 +12,8 @@ const routes: Routes = [
   { path: 'dweets', component: DweetComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'unauthorized', component: LoginComponent },
+  { path: 'unauthorized', component: UnAuthorizedComponenet },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

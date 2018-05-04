@@ -1,11 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/dweets">Dwitter</a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
             <span><strong>Welcome {{loggedInUser.userName}}</strong></span>
           </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" (click)="signout()">Signout</a>
       </li>
     </ul>
@@ -36,8 +35,7 @@
 
 
   <div *ngFor="let dweet of dweets" class="dweet-block">
-    <app-dweet-dialog [dweet]="dweet" (click)="openDweet(dweet)"></app-dweet-dialog>
-    <!-- <div class="dweet">
+    <div class="dweet">
             <div class="media">
                 <img class="mr-3" style="width:15%;" src="../../assets/user.svg" alt="Generic placeholder image">
                 <div class="media-body">
@@ -62,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
   </div>
 </div>

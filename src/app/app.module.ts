@@ -11,11 +11,12 @@ import { DweetModule } from './dweet/dweet.module';
 import { DweetDataService } from './app-core/services/dweet-data.service';
 import { UnAuthorizedComponenet } from './app-shared/components/unauthorized.component';
 import { DweeterDataService } from './app-core/services/dweeter-data.service';
+import { NotFoundComponent } from './app-shared/components/not-found.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, UnAuthorizedComponenet
+    AppComponent, UnAuthorizedComponenet, NotFoundComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, AuthModule, DweetModule, ModalModule.forRoot()

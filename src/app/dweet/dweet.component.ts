@@ -93,6 +93,11 @@ export class DweetComponent implements OnInit, OnDestroy {
       this.createDweetSubscription = this.dweetDataService.createDweet(this.dweetMessage).subscribe(data => {
         window.alert('New Dweet Successfully Created');
         this.dweetMessage = undefined;
+      }, error => {
+        if (error.status === 401) {
+          this.router.navigate(['unauthorized']);
+        }
+        console.log(error);
       });
     }
   }
@@ -103,16 +108,17 @@ export class DweetComponent implements OnInit, OnDestroy {
         const currentDweet = this.dweets.find(d => d._id === dweetId);
         currentDweet.likes.push(data);
       }
+    }, error => {
+      if (error.status === 401) {
+        this.router.navigate(['unauthorized']);
+      }
+      console.log(error);
     });
   }
 
   signout() {
     this.authDataService.logout();
     this.router.navigate(["login"]);
-  }
-
-  openDweet(dweet: Dweet) {
-    alert();
   }
 
   ngOnDestroy(): void {
