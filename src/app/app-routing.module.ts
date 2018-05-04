@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: 'dweets', component: DweetComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'unauthorized', component: LoginComponent },
 ];
 
 @NgModule({

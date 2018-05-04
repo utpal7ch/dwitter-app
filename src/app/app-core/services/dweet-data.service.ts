@@ -3,25 +3,28 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Dweet } from "../../shared/dweet";
+import 'rxjs/add/observable/throw';
+import { Dweet } from "../../app-shared/dweet";
+import { HttpServiceBase } from "./http-service-base";
 
 @Injectable()
-export class DweetDataService {
+export class DweetDataService extends HttpServiceBase {
 
   private dweetURL = 'https://dwitter-utpal.herokuapp.com/dweet';
 
   constructor(private http: HttpClient) {
-
+    super();
   }
 
   public getDweets(): Observable<Dweet[]> {
-    return this.http.get<Dweet[]>(this.dweetURL + '/dweet')
+    const options = { headers: this.getHeadersForAuth() };
+    return this.http.get<Dweet[]>(this.dweetURL, options)
     .map(response => response)
     .catch(this.handleError);
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log(error);
+    //console.log(error);
     return Observable.throw(error);
   }
 }
