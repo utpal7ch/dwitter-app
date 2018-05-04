@@ -1,46 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/dweets">Dweeter</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/dweets">Home
-          <span class="sr-only">(current)</span>
-        </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" (click)="signout()">Signout
-                </a>
-                <!-- <button class="nav-link" (click)="signout()">Signout</button> -->
-            </li>
-        </ul>
+  <a class="navbar-brand" href="/dweets">Dwitter</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <span><strong>Welcome {{loggedInUser.userName}}</strong></span>
+          </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="signout()">Signout</a>
+      </li>
+    </ul>
 
-    </div>
+  </div>
 </nav>
 
 <div id="search-component">
-    <input maxlength="30" #searchBox id="search-box" class="form-control mr-sm-2" type="search" (keyup)="searchDweeter(searchBox.value)" placeholder="Search User..." />
-    <ul class="search-result list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let dweeter of searchedDweeter$ | async">
-            {{dweeter.userName}}
-            <button [ngClass]="(dweeter.isFollowing==true)?'btn-primary':'btn-outline-primary'" class="btn btn-sm follow-btn" (click)="followDweeter(dweeter._id)">{{dweeter.isFollowing? 'Following' : 'Follow'}}</button>
-        </li>
-    </ul>
+  <input maxlength="30" #searchBox id="search-box" class="form-control mr-sm-2" type="search" (keyup)="searchDweeter(searchBox.value)"
+    placeholder="Search User..." />
+  <ul class="search-result list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let dweeter of searchedDweeter$ | async">
+      {{dweeter.userName}}
+      <button [ngClass]="(dweeter.isFollowing==true)?'btn-primary':'btn-outline-primary'" class="btn btn-sm follow-btn" (click)="followDweeter(dweeter._id)">{{dweeter.isFollowing? 'Following' : 'Follow'}}</button>
+    </li>
+  </ul>
 </div>
 <div class="container">
 
-    <div class="dweet-block dweet-now-form">
-        <form>
-            <div class="form-group">
-                <input type="textarea" class="form-control" #newDweet [(ngModel)]="dweetMessage" name="new-dweet" placeholder="Enter your dweet...">
-            </div>
-            <button type="button" class="btn btn-outline-primary" [disabled]="!dweetMessage || !dweetMessage.trim()" (click)="createDweet()">Dweet Now</button>
-        </form>
-    </div>
+  <div class="dweet-block dweet-now-form">
+    <form>
+      <div class="form-group">
+        <input type="textarea" class="form-control" #newDweet [(ngModel)]="dweetMessage" name="new-dweet" placeholder="Enter your dweet...">
+      </div>
+      <button type="button" class="btn btn-outline-primary" [disabled]="!dweetMessage || !dweetMessage.trim()" (click)="createDweet()">Dweet Now</button>
+    </form>
+  </div>
 
 
-    <div *ngFor="let dweet of dweets" class="dweet-block">
-        <app-dweet-dialog [dweet]="dweet" (click)="openDweet(dweet)"></app-dweet-dialog>
-        <!-- <div class="dweet">
+  <div *ngFor="let dweet of dweets" class="dweet-block">
+    <app-dweet-dialog [dweet]="dweet" (click)="openDweet(dweet)"></app-dweet-dialog>
+    <!-- <div class="dweet">
             <div class="media">
                 <img class="mr-3" style="width:15%;" src="../../assets/user.svg" alt="Generic placeholder image">
                 <div class="media-body">
@@ -67,5 +64,5 @@
             </div>
         </div> -->
 
-    </div>
+  </div>
 </div>

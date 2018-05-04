@@ -13,6 +13,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DweeterSearchResult } from '../app-shared/dweeter-search-result';
 import { AuthDataService } from '../app-core/services/auth-data.service';
 import { DweetDialogComponent } from '../dweet-dialog/dweet-dialog.component';
+import { User } from '../app-shared/user';
 
 @Component({
   selector: 'app-dweet',
@@ -30,6 +31,7 @@ export class DweetComponent implements OnInit, OnDestroy {
   searchedDweeter$: Observable<DweeterSearchResult[]>;
   modalRef: BsModalRef;
   dweetMessage: string;
+  loggedInUser: User;
 
   constructor(private dweetDataService: DweetDataService,
     private dweeterDataService: DweeterDataService,
@@ -37,19 +39,8 @@ export class DweetComponent implements OnInit, OnDestroy {
     private modalService: BsModalService,
     private authDataService: AuthDataService,
   ) {
-
+    this.loggedInUser = authDataService.getUserDetails();
   }
-  // openDialog(dweet: Dweet): void {
-  //   let dialogRef = this.dialog.open(DweetDialogComponent, {
-  //     width: '250px',
-  //     data: dweet
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-
-  //   });
-  // }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
