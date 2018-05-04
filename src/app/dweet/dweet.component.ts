@@ -13,7 +13,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DweeterSearchResult } from '../app-shared/dweeter-search-result';
 import { AuthDataService } from '../app-core/services/auth-data.service';
 import { DweetDialogComponent } from '../dweet-dialog/dweet-dialog.component';
- 
+
 @Component({
   selector: 'app-dweet',
   templateUrl: './dweet.component.html',
@@ -29,13 +29,14 @@ export class DweetComponent implements OnInit, OnDestroy {
   private dweeterSearchSub = new Subject<string>();
   searchedDweeter$: Observable<DweeterSearchResult[]>;
   modalRef: BsModalRef;
+  dweetMessage: string;
 
   constructor(private dweetDataService: DweetDataService,
     private dweeterDataService: DweeterDataService,
     private router: Router,
     private modalService: BsModalService,
-    private authDataService: AuthDataService, 
-    ) {
+    private authDataService: AuthDataService,
+  ) {
 
   }
   // openDialog(dweet: Dweet): void {
@@ -46,7 +47,7 @@ export class DweetComponent implements OnInit, OnDestroy {
 
   //   dialogRef.afterClosed().subscribe(result => {
   //     console.log('The dialog was closed');
-      
+
   //   });
   // }
 
@@ -96,16 +97,18 @@ export class DweetComponent implements OnInit, OnDestroy {
     // console.log(userId);
   }
 
-  createDweet(message: string) {
-    this.createDweetSubscription = this.dweetDataService.createDweet(message).subscribe(data => {
-      console.log(data);
-
-    });
+  createDweet() {
+    if (this.dweetMessage && this.dweetMessage.trim()) {
+      this.createDweetSubscription = this.dweetDataService.createDweet(this.dweetMessage).subscribe(data => {
+        window.alert('New Dweet Successfully Created');
+        this.dweetMessage = undefined;
+      });
+    }
   }
 
   likeDweet(dweetId: string) {
     this.likeDweetSubscription = this.dweetDataService.likeDweet(dweetId).subscribe(data => {
-      if(data) {
+      if (data) {
         const currentDweet = this.dweets.find(d => d._id === dweetId);
         currentDweet.likes.push(data);
       }

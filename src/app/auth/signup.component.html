@@ -1,0 +1,34 @@
+<div class="container">
+    <div>
+        <div *ngIf="!isValidCredentials" class="alert alert-danger col-lg-6">
+            Invalid user name or password
+        </div>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm)">
+            <div class="form-group col-lg-6">
+                <label for="userName">User Name</label>
+                <input type="text" class="form-control" formControlName="userName" />
+                <div class="alert alert-danger" [hidden]="signupForm.controls.userName.untouched || signupForm.controls.userName.valid">User Name is required</div>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="fullName">Full Name</label>
+              <input type="text" class="form-control" formControlName="fullName" />
+              <div class="alert alert-danger" [hidden]="signupForm.controls.fullName.untouched || signupForm.controls.fullName.valid">Full Name is required</div>
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="fullName">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+            <div class="alert alert-danger" [hidden]="signupForm.controls.email.untouched || signupForm.controls.email.valid">Email is required</div>
+        </div>
+            <div class="form-group col-lg-6">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName="password" />
+                <div class="alert alert-danger" [hidden]="signupForm.controls.password.untouched || signupForm.controls.password.valid">Password is required</div>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!signupForm.valid">Submit</button>
+        </form>
+    </div>
+
+
+    <div>
+        <div></div>
+    </div>

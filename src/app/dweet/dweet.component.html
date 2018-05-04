@@ -7,7 +7,7 @@
           <span class="sr-only">(current)</span>
         </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" (click)="signout()">Signout
                 </a>
                 <!-- <button class="nav-link" (click)="signout()">Signout</button> -->
@@ -31,9 +31,9 @@
     <div class="dweet-block dweet-now-form">
         <form>
             <div class="form-group">
-                <input type="textarea" class="form-control" #newDweet id="new-dweet" placeholder="Enter your dweet...">
+                <input type="textarea" class="form-control" #newDweet [(ngModel)]="dweetMessage" name="new-dweet" placeholder="Enter your dweet...">
             </div>
-            <button type="button" class="btn btn-outline-primary" (click)="createDweet(newDweet.value)">Dweet Now</button>
+            <button type="button" class="btn btn-outline-primary" [disabled]="!dweetMessage || !dweetMessage.trim()" (click)="createDweet()">Dweet Now</button>
         </form>
     </div>
 
