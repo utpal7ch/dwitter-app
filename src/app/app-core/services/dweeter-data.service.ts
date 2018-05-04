@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 import { Dweet } from "../../app-shared/dweet";
 import { HttpServiceBase } from "./http-service-base";
 import { Dweeter } from "../../app-shared/dweeter";
+import { DweeterSearchResult } from "../../app-shared/dweeter-search-result";
 
 @Injectable()
 export class DweeterDataService extends HttpServiceBase {
@@ -17,12 +18,21 @@ export class DweeterDataService extends HttpServiceBase {
     super();
   }
 
-  public searchDweeter(searchTerm: string): Observable<Dweeter[]> {
+  public searchDweeter(searchTerm: string): Observable<DweeterSearchResult[]> {
     const options = { headers: this.getHeadersForAuth() };
-    return this.http.get<Dweeter[]>(`${this.dweeterURL}/search?queryString=${searchTerm}`, options)
+    return this.http.get<DweeterSearchResult[]>(`${this.dweeterURL}/search?queryString=${searchTerm}`, options)
     .map(response => response)
     .catch(this.handleError);
   }
+
+  public followDweeter(followerId: string): Observable<DweeterSearchResult[]> {
+    const options = { headers: this.getHeadersForAuth() };
+    return this.http.patch<DweeterSearchResult[]>(`${this.dweeterURL}/${followerId}/follow`, undefined, options)
+    .map(response => response)
+    .catch(this.handleError);
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     //console.log(error);

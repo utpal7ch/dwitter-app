@@ -21,7 +21,9 @@ export class AuthDataService extends HttpServiceBase {
   public login(loginDetails: Login): Observable<User> {
     return this.http.post<User>(this.authUrl + '/login', loginDetails)
       .map(response => {
-        this.createAndSaveAuthToken(response);
+        if(response) {
+          this.createAndSaveAuthToken(response);
+        }
         return response;
       })
       .catch(this.handleError);

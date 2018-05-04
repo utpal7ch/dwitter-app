@@ -29,4 +29,8 @@ export class HttpServiceBase {
   public hasValidAuthToken(): boolean {
     return this.sessionStorage.getItem(this.authHeaderKey) !== null;
   }
+
+  public getLoggedInUserId(): string {
+    return this.sessionStorage.getItem(this.authHeaderKey);
+  }
 }

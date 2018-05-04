@@ -19,8 +19,26 @@ export class DweetDataService extends HttpServiceBase {
   public getDweets(): Observable<Dweet[]> {
     const options = { headers: this.getHeadersForAuth() };
     return this.http.get<Dweet[]>(this.dweetURL, options)
-    .map(response => response)
-    .catch(this.handleError);
+      .map(response => response)
+      .catch(this.handleError);
+  }
+
+  public createDweet(message: string): Observable<Dweet> {
+    const options = { headers: this.getHeadersForAuth() };
+    return this.http.post<Dweet>(`${this.dweetURL}/create`, { message: message }, options)
+      .map(response => response)
+      .catch(this.handleError);
+  }
+
+  public likeDweet(dweetId: string): Observable<Dweet> {
+    const options = { headers: this.getHeadersForAuth() };
+    return this.http.patch<Dweet>(`${this.dweetURL}/${dweetId}/like`, undefined, options)
+      .map(response => {
+        if(response) {
+          return this.getLoggedInUserId();
+        }
+      })
+      .catch(this.handleError);
   }
 
   private handleError(error: HttpErrorResponse) {

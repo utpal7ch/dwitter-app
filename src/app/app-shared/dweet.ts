@@ -4,6 +4,7 @@ export class Dweet {
   public likes: [Object];
   public redweets: [Object];
   public dweeterId: string;
+  public dweeterName: string;
   public message: string;
   public comments: string[];
 }
