@@ -1,0 +1,26 @@
+<div class="dweet">
+    <div class="media">
+        <img class="mr-3" style="width:15%;" src="../../assets/user.svg" alt="Generic placeholder image">
+        <div class="media-body">
+            <h5 class="mt-0">
+                <a>{{dweet.dweeterName}}</a>
+            </h5>
+            <h6>Wrote on {{dweet.createdDate | date:'medium'}} </h6>
+            <p class="dweet-message">{{dweet.message}}</p>
+            <div>
+                <a>
+                    <span class="badge badge-success">
+      <img src="../../assets/comment.svg"> {{dweet.comments.length }} </span>
+                </a>
+                <a (click)="likeDweet(dweet._id)">
+                    <span class="badge badge-success">
+      <img src="../../assets/thumbsup.svg"> {{ dweet.likes.length }}</span>
+                </a>
+                <a>
+                    <span class="badge badge-success">
+      <img src="../../assets/sync.svg"> {{dweet.redweets.length }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

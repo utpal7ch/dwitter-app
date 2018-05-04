@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { DweetDataService } from '../app-core/services/dweet-data.service';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/of';
 import { Dweet } from '../app-shared/dweet';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
@@ -11,7 +12,8 @@ import { DweeterDataService } from '../app-core/services/dweeter-data.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DweeterSearchResult } from '../app-shared/dweeter-search-result';
 import { AuthDataService } from '../app-core/services/auth-data.service';
-
+import { DweetDialogComponent } from '../dweet-dialog/dweet-dialog.component';
+ 
 @Component({
   selector: 'app-dweet',
   templateUrl: './dweet.component.html',
@@ -32,9 +34,21 @@ export class DweetComponent implements OnInit, OnDestroy {
     private dweeterDataService: DweeterDataService,
     private router: Router,
     private modalService: BsModalService,
-    private authDataService: AuthDataService) {
+    private authDataService: AuthDataService, 
+    ) {
 
   }
+  // openDialog(dweet: Dweet): void {
+  //   let dialogRef = this.dialog.open(DweetDialogComponent, {
+  //     width: '250px',
+  //     data: dweet
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+      
+  //   });
+  // }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -60,6 +74,8 @@ export class DweetComponent implements OnInit, OnDestroy {
   searchDweeter(term: string) {
     if (term) {
       this.dweeterSearchSub.next(term);
+    } else {
+      this.searchedDweeter$ = Observable.of();
     }
   }
 
@@ -77,13 +93,13 @@ export class DweetComponent implements OnInit, OnDestroy {
     //     }
     //   })
     // })
-    //console.log(userId);
+    // console.log(userId);
   }
 
   createDweet(message: string) {
     this.createDweetSubscription = this.dweetDataService.createDweet(message).subscribe(data => {
       console.log(data);
-      
+
     });
   }
 
@@ -99,6 +115,10 @@ export class DweetComponent implements OnInit, OnDestroy {
   signout() {
     this.authDataService.logout();
     this.router.navigate(["login"]);
+  }
+
+  openDweet(dweet: Dweet) {
+    alert();
   }
 
   ngOnDestroy(): void {
