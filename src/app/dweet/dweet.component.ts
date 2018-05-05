@@ -12,7 +12,6 @@ import { DweeterDataService } from '../app-core/services/dweeter-data.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { DweeterSearchResult } from '../app-shared/dweeter-search-result';
 import { AuthDataService } from '../app-core/services/auth-data.service';
-import { DweetDialogComponent } from '../dweet-dialog/dweet-dialog.component';
 import { User } from '../app-shared/user';
 
 @Component({
