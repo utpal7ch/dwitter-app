@@ -6,6 +6,7 @@ import { Dweet } from '../app-shared/dweet';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Dweeter } from '../app-shared/dweeter';
 import { DweeterDataService } from '../app-core/services/dweeter-data.service';
@@ -28,6 +29,7 @@ export class DweetComponent implements OnInit, OnDestroy {
   dweets: Dweet[];
   private dweeterSearchSub = new Subject<string>();
   searchedDweeter$: Observable<DweeterSearchResult[]>;
+  searchedDweeter: DweeterSearchResult[];
   modalRef: BsModalRef;
   dweetMessage: string;
   loggedInUser: User;
@@ -52,6 +54,8 @@ export class DweetComponent implements OnInit, OnDestroy {
       switchMap((term: string) => this.dweeterDataService.searchDweeter(term)),
     );
 
+    this.searchedDweeter$.subscribe(item => this.searchedDweeter = item);
+
     this.getDweetsSubscription = this.dweetDataService.getDweets().subscribe(data => {
       this.dweets = data;
     }, error => {
@@ -72,19 +76,11 @@ export class DweetComponent implements OnInit, OnDestroy {
 
   followDweeter(followerId: string) {
     this.followDweeterSubscription = this.dweeterDataService.followDweeter(followerId).subscribe(data => {
-      console.log(data);
+      if(data) {
+        const followedDwitter = this.searchedDweeter.find(item => item._id === followerId);
+        followedDwitter.isFollowing = true;
+      }
     });
-    // debugger;
-    // this.searchedDweeter$.forEach(dweeterArray => {
-    //   dweeterArray.forEach(d => {
-    //     console.log(d._id);
-    //     if (d._id === followerId) {
-    //       d.isFollowing = true;
-    //       console.log('done');
-    //     }
-    //   })
-    // })
-    // console.log(userId);
   }
 
   createDweet() {

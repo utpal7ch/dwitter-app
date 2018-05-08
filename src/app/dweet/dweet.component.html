@@ -16,7 +16,7 @@
   <input maxlength="30" #searchBox id="search-box" class="form-control mr-sm-2" type="search" (keyup)="searchDweeter(searchBox.value)"
     placeholder="Search User..." />
   <ul class="search-result list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let dweeter of searchedDweeter$ | async">
+    <li class="list-group-item" *ngFor="let dweeter of searchedDweeter">
       {{dweeter.userName}}
       <button [ngClass]="(dweeter.isFollowing==true)?'btn-primary':'btn-outline-primary'" class="btn btn-sm follow-btn" (click)="followDweeter(dweeter._id)">{{dweeter.isFollowing? 'Following' : 'Follow'}}</button>
     </li>
